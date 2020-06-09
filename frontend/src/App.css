@@ -4,6 +4,11 @@ body, html, #root, .app, .container {
   height: 100%;
 }
 
+.profilePic{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .container {
   font-size: 28px;
@@ -56,3 +61,4 @@ body, html, #root, .app, .container {
  background: #fff;
  cursor: pointer;
 }
+
