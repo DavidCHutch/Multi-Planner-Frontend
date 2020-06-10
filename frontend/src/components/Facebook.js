@@ -20,6 +20,9 @@ export default class LoginFacebook extends Component{
         if(response.status !== 'unknown'){
             this.setState({
                 auth: true,
+                userID: response.userID,
+                accessToken: response.accessToken,
+                expiresIn: response.expiresIn,
                 name: response.name,
                 picture: response.picture.data.url
             });
@@ -35,6 +38,7 @@ export default class LoginFacebook extends Component{
                     <h2>Weclome {this.state.name}</h2>
                     <img src={this.state.picture} alt={this.state.name} className="profilePic"/>
                 </div>
+                
             ) :
             facebookData = (
                 <FacebookLoginBtn

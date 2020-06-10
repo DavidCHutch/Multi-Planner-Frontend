@@ -17,7 +17,7 @@ body, html, #root, .app, .container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #282c34;
+  background-color: #F76C6C;
 }
 
 .loginForm {
@@ -26,6 +26,7 @@ body, html, #root, .app, .container {
  max-width: 400px;
  padding-left: 20px;
  padding-right: 20px;
+ margin-bottom: 20px;
 }
 
 .inputField {
@@ -48,6 +49,10 @@ body, html, #root, .app, .container {
  padding-top: 16px;
 }
 
+.loadingSpinner{
+  display:block;
+  margin: 0 auto;
+}
 
 .btn {
  width: 100%;

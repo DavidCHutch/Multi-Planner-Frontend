@@ -1,92 +1,53 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import './App.css';
-import Facebook from './components/Facebook';
-// import UserStore from './stores/UserStore';
+// import Facebook from './components/Facebook';
 // import LoginForm from './components/LoginForm';
+// import Loading from './components/Loading';
+// import UserStore from './stores/UserStore';
 // import SubmitButton from './components/SubmitButton';
 
-// import { 
-//   BrowserRouter as Router, 
-//   Route, 
-//   Switch, 
-//   Link, 
-//   Redirect 
-// } from "react-router-dom";
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Switch, 
+  Link, 
+  Redirect 
+} from "react-router-dom";
 
-// //Pages
-// import MainPage from "./pages";
-// import NotFoundPage from "./pages/404";
-// import UsersPage from "./pages/users";
-// import LoginPage from "./pages/login";
+//Pages
+import MainPage from "./pages";
+import ErrorPage from "./pages/Error";
+import LoginPage from "./pages/login";
 
 class App extends Component {
   render(){
     return (
-      <div className="app">
-        <div className="container">
-          <p>
-            Facebook Authentication
-          </p>
-          <Facebook/>
-        </div>
-      </div>
-    );
+      <Router>
+        <Switch> 
+          <Route exact path="/" component={MainPage}/>
+          <Route exact path="/login" component={LoginPage}/>
+          <Route exact path="/error" component={ErrorPage}/>
+          <Redirect to="/error"/>
+        </Switch>
+      </Router>
+     );
   }
+  
+  // render(){
+  //   return (
+  //     <div className="app">
+  //       <div className="container">
+  //         <LoginForm/>
+  //         <Facebook/>
+  //         <Loading/>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 }
 
 // class App extends Component{
-  // async componentDidMount(){
-  //   try{
-  //     let res = await fetch('/isLoggedIn', {
-  //       method: 'post',
-  //       headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
-
-  //     let result = await res.json();
-
-  //     if(result && result.success){
-  //       UserStore.loading = false;
-  //       UserStore.isLoggedIn = true;
-  //       UserStore.username = result.username;
-  //     }
-  //     else{
-  //       UserStore.loading = false;
-  //       UserStore.isLoggedIn = false;
-  //     }
-  //   }
-  //   catch(e){
-  //       UserStore.loading = false;
-  //       UserStore.isLoggedIn = false;
-  //   }
-  // }
-  
-  // async doLogout(){
-  //   try{
-
-  //     let res = await fetch('/logout', {
-  //       method: 'post',
-  //       headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
-
-  //     let result = await res.json();
-
-  //     if(result && result.success){
-  //       UserStore.isLoggedIn = false;
-  //       UserStore.username = '';
-  //     }
-  //   }
-  //   catch(e){
-  //       console.log(e);
-  //   }
-  // }
-
   // render() {
   //   if(UserStore.loading){
   //     return (
