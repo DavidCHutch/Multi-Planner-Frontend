@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImputField from './InputField';
+// import ImputField from './InputField';
 import SubmitButton from './SubmitButton';
 import UserStore from '../stores/UserStore';
 import InputField from './InputField';
@@ -49,7 +49,7 @@ class LoginForm extends Component{
     })
 
     try{
-      let res = await fetch('/login', {
+      let res = await fetch('/api/login', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -81,8 +81,11 @@ class LoginForm extends Component{
 
   render() {
     return (
-    <div className="loginForm">
-        Log in
+    <div className="loginForm" id="logForm">
+        <div className="logTitle">
+          <h2>Log in</h2>
+        </div>
+        
         <InputField
           type='text'
           placeholder='Username'

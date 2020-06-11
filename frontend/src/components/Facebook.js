@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import FacebookLoginBtn from 'react-facebook-login';
+var facebookSessionData;
 
 export default class LoginFacebook extends Component{
-
-    state = {
-        auth: false,
-        name: '',
-        picture: ''
+    constructor(props){
+        super(props);
+        this.state = {
+            auth: false,
+            userID: '',
+            accessToken: '',
+            expiresIn: 0,
+            name: '',
+            picture: ''
+        }
+    }
+      
+    getData = () => {
+        let data = sessionStorage.getItem('FacebookData');
+        data = JSON.parse(data);
+        facebookSessionData = data;
     }
 
     componentClicked = () => {
@@ -16,7 +28,6 @@ export default class LoginFacebook extends Component{
     }
 
     responseFacebook = (response) => {
-        console.log(response);
         if(response.status !== 'unknown'){
             this.setState({
                 auth: true,
@@ -26,28 +37,44 @@ export default class LoginFacebook extends Component{
                 name: response.name,
                 picture: response.picture.data.url
             });
+            sessionStorage.setItem('FacebookData', JSON.stringify(response));
+            var elm = document.getElementById('logForm');
+            if(elm !== null){
+                elm.style.display='none';
+            }
         }
     }
 
     render(){
         let facebookData;
-
-        this.state.auth ? 
+        this.getData()
+        if(this.state.auth){
             facebookData = (
                 <div>
                     <h2>Weclome {this.state.name}</h2>
                     <img src={this.state.picture} alt={this.state.name} className="profilePic"/>
                 </div>
                 
-            ) :
+            )
+        }
+        else if(facebookSessionData){
+            facebookData = (
+                <div>
+                    <h2>Weclome {facebookSessionData.name}</h2>
+                    <img src={facebookSessionData.picture.data.url} alt={facebookSessionData.name} className="profilePic"/>
+                </div>
+            )
+        }
+        else{
             facebookData = (
                 <FacebookLoginBtn
                     appId="3269841343029131"
-                    autoLoad={true}
+                    autoLoad={false}
                     fields="name,email,picture"
                     onClick={this.componentClicked}
                     callback={this.responseFacebook} />
             );
+        }
 
         return(
             <>
